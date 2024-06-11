@@ -7,10 +7,10 @@ public class TestContaBancaria {
 
     @Test
     public void TestNumeroContaBancaria() {
-        ContaBancaria conta1 = new ContaBancaria();
-        ContaBancaria conta2 = new ContaBancaria();
-        ContaBancaria conta3 = new ContaBancaria();
-        ContaBancaria conta4 = new ContaBancaria();
+        ContaBancaria conta1 = new ContaBancaria(1);
+        ContaBancaria conta2 = new ContaBancaria(2);
+        ContaBancaria conta3 = new ContaBancaria(3);
+        ContaBancaria conta4 = new ContaBancaria(4);
 
         assertEquals(conta1.getNumeroConta(), 1);
         assertEquals(conta2.getNumeroConta(), 2);
@@ -20,13 +20,13 @@ public class TestContaBancaria {
 
     @Test
     public void TestInicializacaoContaBancaria() {
-        ContaBancaria conta = new ContaBancaria();
+        ContaBancaria conta = new ContaBancaria(1);
         assertEquals(conta.getSaldo(), 0.0, 0.00000001);
     }
 
     @Test
     public void TestDepositosContaBancaria() {
-        ContaBancaria conta = new ContaBancaria();
+        ContaBancaria conta = new ContaBancaria(1);
         conta.depositar(500.00);
         conta.depositar(300.50);
 
@@ -35,7 +35,7 @@ public class TestContaBancaria {
 
     @Test
     public void TestSaquesContaBancaria() {
-        ContaBancaria conta = new ContaBancaria();
+        ContaBancaria conta = new ContaBancaria(1);
         conta.depositar(700.0);
 
         boolean tentativaSaque = conta.sacar(1000.0);

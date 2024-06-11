@@ -14,6 +14,7 @@ import static sistemabancario.Utils.Validacoes.*;
 public class Database {
 
     private List<Cliente> clientes = new ArrayList<>();
+    private int numeroContas = 0;
 
     public Cliente getByCpf(String cpf) {
         for(Cliente cliente : this.clientes) {
@@ -37,10 +38,12 @@ public class Database {
         printInLine("Crie uma senha para sua conta: ");
         String senhaCliente = readString();
 
+        this.numeroContas++;
+
         novoCliente.setNome(nomeCliente);
         novoCliente.setCpf(cpfCliente);
         novoCliente.setSenha(senhaCliente);
-        novoCliente.setConta(new ContaBancaria());
+        novoCliente.setConta(new ContaBancaria(this.numeroContas));
 
         this.adicionaCliente(novoCliente);
         ImprimeCadastroRealizado();

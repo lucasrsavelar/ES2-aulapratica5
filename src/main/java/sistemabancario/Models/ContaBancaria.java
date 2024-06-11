@@ -7,17 +7,14 @@ import static sistemabancario.Utils.IOHelper.*;
 @Data
 public class ContaBancaria {
 
-    private static int numeroAtual = 1;
-
     private String agencia;
     private int numeroConta;
     private double saldo;
 
-    public ContaBancaria() {
+    public ContaBancaria(int numeroConta) {
         this.agencia = "001";
-        this.numeroConta = numeroAtual;
+        this.numeroConta = numeroConta;
         this.saldo = 0.0;
-        numeroAtual++;
     }
 
     public void depositar(double valor) {
