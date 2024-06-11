@@ -9,11 +9,11 @@ import static sistemabancario.Utils.Validacoes.*;
 
 public class OperacoesCliente {
 
+    private boolean pularOperacoes = false;
     public void operacoesCliente(Cliente cliente, Database bancoDeDados) {
 
         ImprimeMenuCliente(cliente.getNome());
         ImprimeOpcoesCliente();
-
         int opcao = validaEscolhaOperacao(readNumber());
 
         while(true) {
@@ -45,19 +45,23 @@ public class OperacoesCliente {
                 Cliente clienteRecebedor = bancoDeDados.getByCpf(cpfRecebedor);
                 if(clienteRecebedor == null) {
                     print("O CPF informado não possui conta ativa em nosso sistema.");
-                    continue;
+                    pularOperacoes = true;
                 }
 
-                printInLine("Digite o valor que deseja transferir: R$");
-                double valorEnviado = readDouble();
-                if(valorEnviado > cliente.getConta().getSaldo()) {
-                    print("Você não possui saldo suficiente para fazer essa transferência");
-                    continue;
-                }
+                if(!pularOperacoes) {
+                    printInLine("Digite o valor que deseja transferir: R$");
+                    double valorEnviado = readDouble();
+                    if (valorEnviado > cliente.getConta().getSaldo()) {
+                        print("Você não possui saldo suficiente para fazer essa transferência");
+                        pularOperacoes = true;
+                    }
 
-                cliente.getConta().sacar(valorEnviado);
-                clienteRecebedor.getConta().depositar(valorEnviado);
-                print("PIX efetuado com sucesso!");
+                    if(!pularOperacoes) {
+                        cliente.getConta().sacar(valorEnviado);
+                        clienteRecebedor.getConta().depositar(valorEnviado);
+                        print("PIX efetuado com sucesso!");
+                    }
+                }
             }
 
             if(opcao == 5) {
@@ -71,6 +75,7 @@ public class OperacoesCliente {
 
             ImprimeNovasOpcoes();
             ImprimeOpcoesCliente();
+            pularOperacoes = false;
             opcao = validaEscolhaOperacao(readNumber());
 
         }

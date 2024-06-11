@@ -1,5 +1,6 @@
 package sistemabancario.Models;
 
+import lombok.Data;
 import sistemabancario.Utils.Validacoes;
 
 import java.util.ArrayList;
@@ -8,6 +9,8 @@ import java.util.List;
 import static sistemabancario.Utils.Menus.*;
 import static sistemabancario.Utils.IOHelper.*;
 import static sistemabancario.Utils.Validacoes.*;
+
+@Data
 public class Database {
 
     private List<Cliente> clientes = new ArrayList<>();
