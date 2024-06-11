@@ -21,11 +21,19 @@ public class SistemaBancarioApplication {
             if (opcao == 1) {
                 ImprimeBoasVindas();
                 String resultadoLogin = bancoDeDados.fazerLogin();
-                if(resultadoLogin.equals(INVALID_USER))
+                boolean loginValido = true;
+
+                if(resultadoLogin.equals(INVALID_USER)) {
                     print("Usuário não encontrado! Verifique seu CPF e tente novamente.");
-                if(resultadoLogin.equals(INVALID_PASSWORD))
+                    loginValido = false;
+                }
+
+                if(resultadoLogin.equals(INVALID_PASSWORD)) {
                     print("Senha incorreta para o usuário! Tente novamente.");
-                else {
+                    loginValido = false;
+                }
+
+                if(loginValido) {
                     print("Login efetuado com sucesso!");
                     Cliente clienteLogado = bancoDeDados.getByCpf(resultadoLogin);
                     OperacoesCliente operacoes = new OperacoesCliente();
